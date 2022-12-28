@@ -1,4 +1,4 @@
-# Lecture 01
+# Lecture 02
 
 ## Kotlin 에서 Null 다루는 방법
 

@@ -1,7 +1,5 @@
 package com.study.kotlin.lecture_01
 
-class Variable
-
 fun main() {
     // 가변 변수 > var 키워드를 사용한다.
     // var 키워드를 선언한 변수는 값 변경이 가능하다.

@@ -1,7 +1,5 @@
 package com.study.kotlin.lecture_02
 
-class NullChecker
-
 fun main() {
     // Kotlin 에서는 null 이 가능한 타입을 완전히 다르게 취급한다.
     val result1: Boolean = startsWithA1("Apple")
