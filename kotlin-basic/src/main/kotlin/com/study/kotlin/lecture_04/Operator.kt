@@ -13,7 +13,7 @@ fun main() {
     if (money2 >= money3) println("money2 은 money3 과 같거나 큽니다.")
     if (money3 <= money2) println("money3 은 money2 와 같거나 작습니다.")
 
-    // 비교 연산자
+    // 동등 비교 연산자
     // 동등성 > 두 객체의 값이 같은가?
     if (money1 !== money2) println("money1 과 money2 는 서로 다른 값이다.")
     if (money2 === money3) println("money2 와 money3 는 동일한 값이다.")
