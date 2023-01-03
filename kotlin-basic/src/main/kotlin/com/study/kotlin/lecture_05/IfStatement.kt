@@ -1,6 +1,6 @@
 package com.study.kotlin.lecture_05
 
-fun validateScoreIsNotNagative(score: Int) {
+fun validateScoreIsNotNegative(score: Int) {
     // New 를 사용하지 않고 예외를 처리
     if (score < 0) {
         throw IllegalStateException("$score 는 0 보다 작을 수 없습니다.")
