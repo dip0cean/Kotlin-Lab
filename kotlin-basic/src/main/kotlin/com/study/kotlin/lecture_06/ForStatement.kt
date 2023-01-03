@@ -1,4 +1,4 @@
-package com.study.kotlin.lecture_05
+package com.study.kotlin.lecture_06
 
 fun main() {
     // Kotlin For 문의 동작 원리
