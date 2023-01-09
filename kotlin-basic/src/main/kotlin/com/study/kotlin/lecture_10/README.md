@@ -32,3 +32,25 @@ class Penguin(
     }
 }
 ```
+
+## Open Class
+
+> Kotlin 에서 일반 Class 의 경우 final 이기 때문에 다른 Class 가 상속 받을 수 없다.
+> Property 도 마찬가지이다. 때문에 상속 받고자 하는 Class 나 Property 앞에 `open`
+> 이라는 키워드를 붙여주면 상속을 받을 수 있다.
+
+```kotlin
+open class Car {
+
+    open val isLeftHandle = false
+    open val isFourWheels = false
+
+    fun move() {
+        println("자동차가 움직인다.")
+    }
+}
+
+class Sonata : Car {
+    override val isLeftHandle = true
+}
+```
