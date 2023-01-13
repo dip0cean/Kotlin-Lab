@@ -87,6 +87,24 @@ val Dog.age: Int
     get() = 10
 ```
 
-## infix 함수
+## infix 함수 (중위 함수)
+
+> 함수를 호출하는 새로운 방식으로 6강에서 배운 `downTo`, `step` 이 중위 함수에 속한다.
+> 중위 함수란 `변수.함수명(arg)` 와 같은 표현이 아닌 `변수 함수명 arg` 와 같이 사용한다.
+
+```kotlin
+infix fun Int.add(other: Int): Int = this + other
+
+val result = 3 add 7
+println(result)
+
+for (i in 10 downTo 1) {
+    println("i : $i")
+}
+
+for (i in 1..50 step 5) {
+    println("i : $i")
+}
+```
 
 ## inline 함수
