@@ -95,16 +95,31 @@ val Dog.age: Int
 ```kotlin
 infix fun Int.add(other: Int): Int = this + other
 
-val result = 3 add 7
-println(result)
+fun main() {
+    // add
+    val result = 3 add 7
+    println(result)
 
-for (i in 10 downTo 1) {
-    println("i : $i")
-}
+    // downTo
+    for (i in 10 downTo 1) {
+        println("i : $i")
+    }
 
-for (i in 1..50 step 5) {
-    println("i : $i")
+    // step
+    for (i in 1..50 step 5) {
+        println("i : $i")
+    }
 }
 ```
 
 ## inline 함수
+
+> 함수가 호출되는 대신 함수를 호출한 지점에 함수 본문을 그대로 복사하는 경우 사용된다.
+> 여러 함수를 중첩해서 호출하는 경우 오버헤드가 발생하게 되는데,
+> 이 때 inline 함수를 사용하게 되면 함수를 파라미터로 전달하여 오버헤드를 줄일 수 있다.
+> (바이트 코드로 컴파일 시 함수를 호출하는 것이 아닌 함수의 로직이 그대로 작성된다.)
+> 하지만 inline 함수는 성능 측정과 함께 신중하게 사용되어야 한다.
+
+```kotlin
+inline fun Int.add(other: Int): Int = this + other
+```
