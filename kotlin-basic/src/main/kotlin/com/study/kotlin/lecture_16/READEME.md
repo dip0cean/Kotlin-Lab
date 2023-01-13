@@ -123,3 +123,20 @@ fun main() {
 ```kotlin
 inline fun Int.add(other: Int): Int = this + other
 ```
+
+## 지역 함수
+
+> 지역 함수는 함수 내부에서 정의할 수 있는 함수이다.
+> 하지만 이러한 지역 함수는 depth 가 깊어지는 문제 때문에 코드가 깔끔하지 않아
+> 가독성이 떨어지는 문제가 발생할 수 있다.
+
+```kotlin
+fun createPerson(name: String): Person {
+    fun nameValidation(name: String) {
+        if (name.isEmpty()) throw IllegalArgumentException("이름이 비어있습니다.")
+    }
+
+    nameValidation(name)
+    return Person(name)
+}
+```
