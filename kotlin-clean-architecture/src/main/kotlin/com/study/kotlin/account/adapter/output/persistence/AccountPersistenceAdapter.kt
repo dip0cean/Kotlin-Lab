@@ -7,5 +7,4 @@ import com.study.kotlin.common.PersistenceAdapter
 @PersistenceAdapter
 private class AccountPersistenceAdapter(
     private val accountRepository: AccountRepository
-) : LoadAccountPort, UpdateAccountStatePort {
-}
+) : LoadAccountPort, UpdateAccountStatePort

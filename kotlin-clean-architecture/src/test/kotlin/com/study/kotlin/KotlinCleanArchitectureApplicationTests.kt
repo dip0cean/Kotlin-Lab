@@ -8,6 +8,6 @@ class KotlinCleanArchitectureApplicationTests {
 
     @Test
     fun contextLoads() {
+        println()
     }
-
 }
