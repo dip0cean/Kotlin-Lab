@@ -24,6 +24,10 @@ data class Account(
 
     // 입금 함수
     fun withdraw(money: Money, targetAccountId: String): Boolean {
+        // 비즈니스 규칙 검증
+        // 도메인 엔티티 내부에서 비즈니스 규칙을 검증하도록 한다.
+        // 이렇게 처리할 경우 비즈니스 로직과 규칙을 추론하기 수월하다.
+        // 만약 도메인 엔티티에서 처리하기 힘든 경우, UseCase 의 비즈니스 로직 수행 전에 규칙 검증을 수행해도 된다.
         return if (!mayWithdraw(money)) false else {
             val withdrawal = Activity()
             true

@@ -16,7 +16,7 @@ open class SelfValidating<T> {
     protected fun validateSelf() {
         val violations: Set<ConstraintViolation<T>> = this.validator.validate(this as T)
         if (violations.isNotEmpty()) {
-            throw ConstraintViolationException(violations);
+            throw ConstraintViolationException(violations)
         }
     }
 }
