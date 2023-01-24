@@ -8,5 +8,5 @@ data class Activity(
     val sourceAccountId: String = "",
     val targetAccountId: String = "",
     val timestamp: LocalDateTime = LocalDateTime.now(),
-    val money: Money = Money()
+    val money: Money = Money(0L)
 )

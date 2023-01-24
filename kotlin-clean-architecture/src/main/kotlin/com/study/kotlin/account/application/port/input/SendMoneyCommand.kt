@@ -17,7 +17,7 @@ data class SendMoneyCommand(
     @NotNull
     val targetAccountId: String = "",
     @NotNull
-    val money: Money = Money()
+    val money: Money = Money(0L)
 ) : SelfValidating<SendMoneyCommand>() {
 
     init {

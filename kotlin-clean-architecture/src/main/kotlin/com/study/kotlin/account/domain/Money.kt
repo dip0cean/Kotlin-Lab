@@ -1,17 +1,19 @@
 package com.study.kotlin.account.domain
 
-class Money {
-    fun negate(): Any {
-        TODO("Not yet implemented")
-    }
+import java.math.BigInteger
 
-    fun isPositive(): Boolean {
-        return false
-    }
+class Money(
+    amount: Long
+) {
+    private val amount: BigInteger = BigInteger.valueOf(amount)
+
+    fun negate(): Money = Money(this.amount.negate().longValueExact())
+
+    fun isPositive(): Boolean = this.amount > BigInteger.ZERO
 
     companion object {
-        fun add(baseLineBalance: Money, calculateBalance: Any): Money {
-            TODO("Not yet implemented")
+        fun add(baseLineBalance: Money, calculateBalance: Money): Money {
+            return Money(baseLineBalance.amount.add(calculateBalance.amount).longValueExact())
         }
     }
 }

@@ -2,7 +2,7 @@ package com.study.kotlin.account.domain
 
 class ActivityWindow {
 
-    fun calculateBalance(id: String): Any {
+    fun calculateBalance(id: String): Money {
         TODO("Not yet implemented")
     }
 
