@@ -1,14 +1,14 @@
 package com.study.kotlin.programmers.day_2
 
 // https://school.programmers.co.kr/learn/courses/30/lessons/120808
-fun main() {
+private fun main() {
     val result = solution(1, 2, 3, 4)
     val resultCleanCode = solutionCleanCode(1, 2, 3, 4)
     println("분자 : ${result[0]}, 분모 : ${result[1]}")
     println("분자 : ${resultCleanCode[0]}, 분모 : ${resultCleanCode[1]}")
 }
 
-fun solutionCleanCode(
+private fun solutionCleanCode(
     numerator1: Int,
     denominator1: Int,
     numerator2: Int,
@@ -29,7 +29,7 @@ fun solutionCleanCode(
     return intArrayOf(maxNumerator / lowestDivisor, maxDenominator / lowestDivisor)
 }
 
-fun solution(
+private fun solution(
     numerator1: Int,
     denominator1: Int,
     numerator2: Int,
