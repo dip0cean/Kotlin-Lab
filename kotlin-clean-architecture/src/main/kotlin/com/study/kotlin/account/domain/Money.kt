@@ -11,9 +11,9 @@ class Money(
 
     fun isPositive(): Boolean = this.amount > BigInteger.ZERO
 
-    companion object {
-        fun add(baseLineBalance: Money, calculateBalance: Money): Money {
-            return Money(baseLineBalance.amount.add(calculateBalance.amount).longValueExact())
-        }
-    }
+    fun add(calculateBalance: Money): Money = Money((this.amount + calculateBalance.amount).longValueExact())
+
+    fun subtract(calculateBalance: Money): Money = Money((this.amount - calculateBalance.amount).longValueExact())
+
+    fun getAmount(): Long = this.amount.longValueExact()
 }

@@ -9,18 +9,13 @@ package com.study.kotlin.account.domain
  * 또한, Domain 엔티티와 이 책임을 공유한다.
  */
 data class Account(
-    val id: String,
+    val id: Long = 0L,
     // 활동창(ActivityWindow) 의 첫 번째 활동 바로 전의 잔고 표현
-    val baseLineBalance: Money,
-    val activityWindow: ActivityWindow
+    val baseLineBalance: Money = Money(0L),
+    val activityWindow: ActivityWindow = ActivityWindow()
 ) {
 
-    fun calculateBalance(): Money {
-        return Money.add(
-            this.baseLineBalance,
-            this.activityWindow.calculateBalance(this.id)
-        )
-    }
+    fun calculateBalance(): Money = this.baseLineBalance.add(this.activityWindow.calculateBalance(this.id))
 
     // 입금 함수
     fun withdraw(money: Money, targetAccountId: String): Boolean {
@@ -35,7 +30,7 @@ data class Account(
     }
 
     // 출금 함수
-    fun deposit(money: Money, sourceAccountId: String): Boolean {
+    fun deposit(money: Money, sourceAccountId: Long): Boolean {
         val deposit = Activity(
             ownerAccountId = this.id,
             sourceAccountId = sourceAccountId,
@@ -46,10 +41,5 @@ data class Account(
         return true
     }
 
-    private fun mayWithdraw(money: Money): Boolean {
-        return Money.add(
-            this.calculateBalance(),
-            money.negate()
-        ).isPositive()
-    }
+    private fun mayWithdraw(money: Money): Boolean = this.calculateBalance().add(money.negate()).isPositive()
 }

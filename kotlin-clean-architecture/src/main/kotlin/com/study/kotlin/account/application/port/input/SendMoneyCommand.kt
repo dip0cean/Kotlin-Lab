@@ -13,9 +13,9 @@ import jakarta.validation.constraints.NotNull
  */
 data class SendMoneyCommand(
     @NotNull
-    val sourceAccountId: String = "",
+    val sourceAccountId: Long = 0L,
     @NotNull
-    val targetAccountId: String = "",
+    val targetAccountId: Long = 0L,
     @NotNull
     val money: Money = Money(0L)
 ) : SelfValidating<SendMoneyCommand>() {

@@ -1,8 +1,10 @@
 package com.study.kotlin.account.domain
 
-class ActivityWindow {
+class ActivityWindow(
+    val activities: List<Activity> = listOf()
+) {
 
-    fun calculateBalance(id: String): Money {
+    fun calculateBalance(id: Long): Money {
         TODO("Not yet implemented")
     }
 
