@@ -14,8 +14,8 @@ private class AccountController(
 
     @PostMapping("/accounts/send/{sourceAccountId}/{targetAccountId}/{amount}")
     fun sendMoney(
-        @PathVariable("sourceAccountId") sourceAccountId: String,
-        @PathVariable("targetAccountId") targetAccountId: String,
+        @PathVariable("sourceAccountId") sourceAccountId: Long,
+        @PathVariable("targetAccountId") targetAccountId: Long,
         @PathVariable("amount") amount: Long
     ) {
         val command = SendMoneyCommand(sourceAccountId, targetAccountId, Money(amount))
