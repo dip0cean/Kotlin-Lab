@@ -25,22 +25,22 @@ class AccountMapper {
 
     fun mapToActivityWindow(activities: List<EActivity>): ActivityWindow =
         ActivityWindow(
-            activities.map { activity ->
+            activities.map {
                 Activity(
-                    id = activity.id,
-                    ownerAccountId = activity.ownerAccountId,
-                    sourceAccountId = activity.sourceAccountId,
-                    targetAccountId = activity.targetAccountId,
-                    money = Money(activity.amount),
-                    timeStamp = activity.timeStamp
+                    id = it.id,
+                    ownerAccountId = it.ownerAccountId,
+                    sourceAccountId = it.sourceAccountId,
+                    targetAccountId = it.targetAccountId,
+                    money = Money(it.amount),
+                    timeStamp = it.timeStamp
                 )
-            }
+            }.toMutableList()
         )
 
     fun mapToEntity(activity: Activity): EActivity = EActivity(
         ownerAccountId = activity.ownerAccountId,
         sourceAccountId = activity.sourceAccountId,
         targetAccountId = activity.targetAccountId,
-        amount = activity.money.getAmount()
+        amount = activity.money.amount()
     )
 }

@@ -15,5 +15,5 @@ class Money(
 
     fun subtract(calculateBalance: Money): Money = Money((this.amount - calculateBalance.amount).longValueExact())
 
-    fun getAmount(): Long = this.amount.longValueExact()
+    fun amount(): Long = this.amount.longValueExact()
 }

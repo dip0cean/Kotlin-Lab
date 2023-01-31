@@ -1,14 +1,31 @@
 package com.study.kotlin.account.domain
 
+import java.time.LocalDateTime
+
 class ActivityWindow(
-    val activities: List<Activity> = listOf()
+    val activities: MutableList<Activity> = mutableListOf()
 ) {
 
-    fun calculateBalance(id: Long): Money {
-        TODO("Not yet implemented")
+    fun getStartTimeStamp(): LocalDateTime =
+        this.activities.minOfOrNull { it.timeStamp } ?: throw IllegalStateException()
+
+    fun getEndTimeStamp(): LocalDateTime = this.activities.maxOfOrNull { it.timeStamp } ?: throw IllegalStateException()
+
+    fun calculateBalance(accountId: Long): Money {
+        val depositBalance = this.activities
+            .filter { it.targetAccountId == accountId }
+            .map { it.money }
+            .reduce { acc, money -> acc.add(money) }
+
+        val withdrawalBalance = this.activities
+            .filter { it.sourceAccountId == accountId }
+            .map { it.money }
+            .reduce { acc, money -> acc.add(money) }
+
+        return depositBalance.add(withdrawalBalance.negate())
     }
 
     fun addActivity(deposit: Activity) {
-        TODO("Not yet implemented")
+        this.activities.add(deposit)
     }
 }
