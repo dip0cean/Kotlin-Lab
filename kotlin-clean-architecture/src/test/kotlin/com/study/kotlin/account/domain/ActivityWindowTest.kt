@@ -3,6 +3,8 @@ package com.study.kotlin.account.domain
 import com.study.kotlin.Mock
 import io.kotest.core.spec.style.ExpectSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.property.RandomSource
+import io.kotest.property.arbitrary.single
 import io.mockk.every
 import io.mockk.spyk
 import io.mockk.verify
@@ -10,8 +12,8 @@ import io.mockk.verify
 class ActivityWindowTest : ExpectSpec({
 
     context("현재 계좌 활동 창에서") {
-        val activity = Mock.activity()
-        val activityWindow = spyk(Mock.activityWindow(0..9))
+        val activity = Mock.activity().single(RandomSource.default())
+        val activityWindow = spyk(Mock.activityWindow(0..9).single(RandomSource.default()))
 
         expect("새로운 이체 기록을 추가한다") {
             val activitiesSize = activityWindow.activities.size + 1

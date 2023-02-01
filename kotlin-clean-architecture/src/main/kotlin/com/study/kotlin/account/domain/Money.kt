@@ -11,9 +11,11 @@ class Money(
 
     fun isPositive(): Boolean = this.amount > BigInteger.ZERO
 
-    fun add(calculateBalance: Money): Money = Money((this.amount + calculateBalance.amount).longValueExact())
+    operator fun plus(calculateBalance: Money): Money =
+        Money((this.amount + calculateBalance.amount).longValueExact())
 
-    fun subtract(calculateBalance: Money): Money = Money((this.amount - calculateBalance.amount).longValueExact())
+    operator fun minus(calculateBalance: Money): Money =
+        Money((this.amount - calculateBalance.amount).longValueExact())
 
     fun amount(): Long = this.amount.longValueExact()
 }

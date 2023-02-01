@@ -17,7 +17,7 @@ class AccountMapper {
         withdrawalBalance: Long,
         depositBalance: Long
     ): Account {
-        val baseLineBalance = Money(depositBalance).subtract(Money(withdrawalBalance))
+        val baseLineBalance = Money(depositBalance) - Money(withdrawalBalance)
         return Account(
             id = account.id, baseLineBalance = baseLineBalance
         )

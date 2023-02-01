@@ -15,7 +15,7 @@ data class Account(
     val activityWindow: ActivityWindow = ActivityWindow()
 ) {
 
-    fun calculateBalance(): Money = this.baseLineBalance.add(this.activityWindow.calculateBalance(this.id))
+    fun calculateBalance(): Money = this.baseLineBalance + this.activityWindow.calculateBalance(this.id)
 
     // 입금 함수
     fun withdraw(money: Money, targetAccountId: String): Boolean {
@@ -41,5 +41,5 @@ data class Account(
         return true
     }
 
-    private fun mayWithdraw(money: Money): Boolean = this.calculateBalance().add(money.negate()).isPositive()
+    private fun mayWithdraw(money: Money): Boolean = (this.calculateBalance() + money.negate()).isPositive()
 }
