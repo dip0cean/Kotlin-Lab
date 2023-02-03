@@ -15,17 +15,17 @@ class ActivityWindow(
         val depositBalance = this.activities
             .filter { it.targetAccountId == accountId }
             .map { it.money }
-            .reduce { acc, money -> acc + money }
+            .reduceOrNull { acc, money -> acc + money } ?: Money()
 
         val withdrawalBalance = this.activities
             .filter { it.sourceAccountId == accountId }
             .map { it.money }
-            .reduce { acc, money -> acc + money }
+            .reduceOrNull { acc, money -> acc + money } ?: Money()
 
-        return (depositBalance + withdrawalBalance).negate()
+        return depositBalance + withdrawalBalance.negate()
     }
 
-    fun addActivity(deposit: Activity) {
-        this.activities.add(deposit)
+    fun addActivity(activity: Activity) {
+        this.activities.add(activity)
     }
 }

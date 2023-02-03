@@ -30,7 +30,7 @@ object Mock {
     fun activityWindow(range: IntRange) =
         Arb.of(ActivityWindow(activities(range).single(RandomSource.default()).toMutableList()))
 
-    fun money() = Arb.of(Money(Arb.long(1000L..10000L).single(RandomSource.default())))
+    fun money() = Arb.of(Money(Arb.long(10000L..100000L).single(RandomSource.default())))
 
     fun account(baseLineBalance: Money, activityWindow: ActivityWindow) = Arb.of(
         Account(

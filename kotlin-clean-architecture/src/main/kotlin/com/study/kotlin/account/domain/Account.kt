@@ -25,8 +25,8 @@ data class Account(
         // 만약 도메인 엔티티에서 처리하기 힘든 경우, UseCase 의 비즈니스 로직 수행 전에 규칙 검증을 수행해도 된다.
         return if (!mayWithdraw(money)) false else {
             val withdrawal = Activity(
-                id = this.id,
                 ownerAccountId = this.id,
+                sourceAccountId = this.id,
                 targetAccountId = targetAccountId,
                 money = money
             )

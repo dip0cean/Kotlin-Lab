@@ -1,51 +1,76 @@
 package com.study.kotlin.account.domain
 
-import com.study.kotlin.Mock
-import com.study.kotlin.Mock.account
 import io.kotest.core.spec.style.ExpectSpec
+import io.kotest.matchers.longs.shouldBeGreaterThan
+import io.kotest.matchers.longs.shouldBeLessThan
 import io.kotest.matchers.shouldBe
-import io.kotest.property.RandomSource
+import io.kotest.property.Arb
+import io.kotest.property.arbitrary.chunked
+import io.kotest.property.arbitrary.long
+import io.kotest.property.arbitrary.of
 import io.kotest.property.arbitrary.single
-import io.mockk.every
 import io.mockk.spyk
 import io.mockk.verify
 
-class AccountTest : ExpectSpec() {
+class AccountTest : ExpectSpec({
+    context("현재 계좌의") {
+        val accountId = Arb.long(0L..9L).single()
+        val anonymousAccountId = Arb.long(10L..19L).single()
+        val baseLineBalance = Money(Arb.long(10000L..49999L).single())
+        val activityWindow = ActivityWindow(
+            activities = Arb.of(
+                Activity(
+                    ownerAccountId = anonymousAccountId,
+                    sourceAccountId = anonymousAccountId,
+                    targetAccountId = accountId,
+                    money = Money(Arb.long(1000L..1999L).single())
+                )
+            ).chunked(1..9).single().toMutableList()
+        )
+        val account = spyk(
+            Account(
+                id = accountId,
+                baseLineBalance = baseLineBalance,
+                activityWindow = activityWindow
+            )
+        )
 
-    init {
-        val money = Mock.money().single(RandomSource.default())
-        val activityWindow = Mock.activityWindow(0..10).single(RandomSource.default())
-        val account = spyk(account(money, activityWindow).single(RandomSource.default()))
+        expect("잔고를 출력한다.") {
+            val expectBalance = baseLineBalance + activityWindow.calculateBalance(accountId)
+            val balance = account.calculateBalance()
 
-        context("계좌 정보의") {
-
-            expect("현재 잔고를 출력한다.") {
-                every { account.id } returns 0L
-                every { account.calculateBalance() } returns Money(1000L)
-
-                val balance = account.calculateBalance()
-
-                balance.amount() shouldBe 1000L
-                verify(exactly = 1) { account.calculateBalance() }
-            }
+            balance.amount() shouldBe expectBalance.amount()
+            verify(exactly = 1) { account.calculateBalance() }
         }
 
-        context("현재 계좌에") {
-            val otherMoney = Mock.money().single(RandomSource.default())
-            val otherActivityWindow = Mock.activityWindow(0..10).single(RandomSource.default())
-            val otherAccount = spyk(account(otherMoney, otherActivityWindow).single(RandomSource.default()))
+        expect("x 에게 n 원을 송금한다.") {
+            val balance = account.calculateBalance()
+            val withdrawalMoney = Money(Arb.long(1000L..1999L).single())
+            val withdrawalResult = account.withdraw(withdrawalMoney, anonymousAccountId)
 
-            expect("n원을 출금한다.") {
-                every { account.withdraw(otherMoney, otherAccount.id) } returns true
+            withdrawalResult shouldBe true
+            account.calculateBalance().amount() shouldBeLessThan balance.amount()
+            verify(exactly = 1) { account.withdraw(any(), any()) }
+        }
 
-                val beforeBalance = account.calculateBalance() - otherMoney
-                val withdrawalResult = account.withdraw(otherMoney, otherAccount.id)
+        expect("x 에게 n 원 송금을 실패한다.") {
+            val balance = account.calculateBalance()
+            val withdrawalMoney = Money(Arb.long(50000L..99999L).single())
+            val withdrawalResult = account.withdraw(withdrawalMoney, anonymousAccountId)
 
-                withdrawalResult shouldBe true
-                account.calculateBalance().amount() shouldBe beforeBalance.amount()
+            withdrawalResult shouldBe false
+            account.calculateBalance().amount() shouldBe balance.amount()
+            verify(exactly = 2) { account.withdraw(any(), any()) }
+        }
 
-                verify { account.withdraw(otherMoney, otherAccount.id) }
-            }
+        expect("x 로부터 n 원을 입급 받는다.") {
+            val balance = account.calculateBalance()
+            val depositMoney = Money(Arb.long(1000L..1999L).single())
+            val depositResult = account.deposit(depositMoney, anonymousAccountId)
+
+            depositResult shouldBe true
+            account.calculateBalance().amount() shouldBeGreaterThan balance.amount()
+            verify(exactly = 1) { account.deposit(any(), any()) }
         }
     }
-}
+})
