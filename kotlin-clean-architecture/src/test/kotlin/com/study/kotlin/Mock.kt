@@ -25,7 +25,7 @@ object Mock {
         )
     )
 
-    fun activities(range: IntRange) = activity().chunked(range)
+    private fun activities(range: IntRange) = activity().chunked(range)
 
     fun activityWindow(range: IntRange) =
         Arb.of(ActivityWindow(activities(range).single(RandomSource.default()).toMutableList()))

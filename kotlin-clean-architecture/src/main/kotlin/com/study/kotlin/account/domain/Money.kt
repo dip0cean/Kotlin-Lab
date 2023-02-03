@@ -2,20 +2,23 @@ package com.study.kotlin.account.domain
 
 import java.math.BigInteger
 
-class Money(
-    amount: Long
+data class Money(
+    val amount: Long
 ) {
-    private val amount: BigInteger = BigInteger.valueOf(amount)
 
-    fun negate(): Money = Money(this.amount.negate().longValueExact())
+    private val decimalAmount: BigInteger = BigInteger.valueOf(this.amount)
 
-    fun isPositive(): Boolean = this.amount > BigInteger.ZERO
+    fun negate(): Money = Money(this.decimalAmount.negate().longValueExact())
+
+    fun isPositive(): Boolean = this.decimalAmount > BigInteger.ZERO
+
+    fun isPositiveOrZero(): Boolean = this.decimalAmount >= BigInteger.ZERO
 
     operator fun plus(calculateBalance: Money): Money =
-        Money((this.amount + calculateBalance.amount).longValueExact())
+        Money((this.amount + calculateBalance.amount))
 
     operator fun minus(calculateBalance: Money): Money =
-        Money((this.amount - calculateBalance.amount).longValueExact())
+        Money((this.amount - calculateBalance.amount))
 
-    fun amount(): Long = this.amount.longValueExact()
+    fun amount(): Long = decimalAmount.longValueExact()
 }
