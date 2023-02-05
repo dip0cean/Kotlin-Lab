@@ -1,5 +1,6 @@
 package com.study.kotlin.programmers.day_4
 
+// https://school.programmers.co.kr/learn/courses/30/lessons/120815
 fun main() {
     val result = solution(10)
     println(result)
