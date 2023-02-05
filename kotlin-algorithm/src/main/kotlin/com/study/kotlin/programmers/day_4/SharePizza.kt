@@ -12,7 +12,7 @@ fun main() {
 
 private val piece = BigInteger.valueOf(7L)
 
-fun solution(n: Int): Int {
+private fun solution(n: Int): Int {
     val personnel = BigInteger.valueOf(n.toLong())
 
     return personnel.divide(piece)
