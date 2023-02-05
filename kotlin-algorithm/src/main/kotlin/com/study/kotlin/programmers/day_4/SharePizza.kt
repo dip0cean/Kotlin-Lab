@@ -23,4 +23,4 @@ private fun solution(n: Int): Int {
  * ceil(value: Double) / ceil(value: Float)
  * - ceil() 은 Kotlin 기본 내장 함수로 나머지 값에 대한 반올림한 결과를 반환하는 함수이다.
  */
-fun solutionCleanCode(n: Int): Int = ceil(n / 7.0).toInt()
+private fun solutionCleanCode(n: Int): Int = ceil(n / 7.0).toInt()
