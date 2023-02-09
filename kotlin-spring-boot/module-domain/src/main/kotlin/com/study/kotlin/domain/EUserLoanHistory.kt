@@ -15,9 +15,6 @@ class EUserLoanHistory(
     @Column(name = "book_name", columnDefinition = "varchar")
     val bookName: String,
 
-    @Column(name = "user_id", columnDefinition = "long")
-    val userId: Long,
-
     @Column(name = "is_return", columnDefinition = "boolean")
     var isReturn: Boolean
 ) {
