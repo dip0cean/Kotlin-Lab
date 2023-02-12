@@ -5,6 +5,8 @@ dependencies {
     implementation(project(":module-domain")) // domain project setting 1
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    testImplementation(testFixtures(project(":module-domain")))
 }
 
 tasks {
@@ -36,7 +38,7 @@ tasks {
         }
 
         // BootJar 파일명
-        archiveBaseName.set("insight")
+        archiveBaseName.set("api")
         // BootJar 버전
         archiveVersion.set("")
     }

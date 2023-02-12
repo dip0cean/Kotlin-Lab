@@ -48,23 +48,16 @@ allprojects {
         asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
 
         val testImplementation by configurations
+        testImplementation("io.kotest:kotest-runner-junit5-jvm:5.5.4")
+        testImplementation("io.kotest:kotest-assertions-core-jvm:5.5.4")
+        testImplementation("io.kotest:kotest-extensions-jvm:5.5.4")
+        testImplementation("io.kotest:kotest-property-jvm:5.5.4")
         testImplementation("com.ninja-squad:springmockk:4.0.0")
         testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
         testImplementation("org.springframework.boot:spring-boot-starter-test") {
             exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
             exclude(module = "mockito-core")
         }
-
-        // test - kotest
-        testImplementation("io.kotest:kotest-runner-junit5-jvm:5.5.4")
-        testImplementation("io.kotest:kotest-assertions-core-jvm:5.5.4")
-        testImplementation("io.kotest:kotest-extensions-jvm:5.5.4")
-        testImplementation("io.kotest:kotest-property-jvm:5.5.4")
-
-        testImplementation("com.h2database:h2")
-
-        val compileOnly by configurations
-        compileOnly("net.spy:spymemcached:2.12.3")
     }
 
     configure<KtlintExtension> {

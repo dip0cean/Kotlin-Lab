@@ -1,6 +1,9 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
+    id("java-test-fixtures")
+    id("maven-publish")
+    id("java-library")
     kotlin("kapt")
     kotlin("plugin.jpa")
     kotlin("plugin.serialization")
@@ -26,6 +29,13 @@ dependencies {
     implementation("com.eaio.uuid:uuid:3.2")
 
     runtimeOnly("com.mysql:mysql-connector-j")
+
+    testFixturesImplementation("com.ninja-squad:springmockk:4.0.0")
+    testFixturesImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testFixturesImplementation("io.kotest:kotest-runner-junit5-jvm:5.5.4")
+    testFixturesImplementation("io.kotest:kotest-assertions-core-jvm:5.5.4")
+    testFixturesImplementation("io.kotest:kotest-extensions-jvm:5.5.4")
+    testFixturesImplementation("io.kotest:kotest-property-jvm:5.5.4")
 }
 
 tasks {
