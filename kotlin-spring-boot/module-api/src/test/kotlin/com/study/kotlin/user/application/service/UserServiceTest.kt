@@ -55,7 +55,9 @@ class UserServiceTest : ExpectSpec({
             every { userService.getAllUser() } returns user.chunked(10..10)
                 .single(RandomSource.default())
 
-            val userList = userService.getAllUser()
+            val userList = withContext(Dispatchers.IO) {
+                userService.getAllUser()
+            }
 
             userList.size shouldBe 10
         }
