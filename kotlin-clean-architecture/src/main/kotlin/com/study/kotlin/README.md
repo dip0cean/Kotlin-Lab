@@ -151,5 +151,20 @@
 
 #### Persistence Adapter 나누기
 
-> 도메인 코드는 영속성 포트에 의해 정의된 명세를 어떤 클래스가 충족시키는지 관심을 가지면 안된다.
-> 
+> **도메인 코드는 영속성 포트에 의해 정의된 명세를 어떤 클래스가 충족시키는지 관심을 가지면 안된다.**
+> 또한 하나 이상의 클래스 생성을 금지하는 규칙이 존재하지 않기 때문에 영속성 연산이 필요한 도메인 클래스
+> (DDD, 애그리거트) 하나당 하나의 Persistence Adapter 를 구현하는 방식을 선택할 수 있다.
+> (즉, 도메인 역할에 따라 Port 를 구현하는 Persistence Adapter 를 분리해도 된다.)
+
+#### Bounded Context ?
+
+> Bounded Context 란 표현은 경계를 의미한다. 
+> 각각의 도메인 Persistence Adapter 영역을 서로 접근하지 않는다는 의미를 가진다. 
+> 만약 Bounded Context 를 넘어서 Persistence Adapter 에 접근해야 하는 경우 Incomming Port 를 통해서 접근할 수 있도록 해야 한다.
+
+#### Transaction 의 경계는 어디에 위치해야 할까?
+
+> Transaction 은 하나의 비즈니스 로직을 작업 하나로 바라보기 때문에 Persistence Adapter 가 이에 대한 책임을 지는 것은 옳지 않다. 
+> 즉, 어떤 작업 중에 자신이 처리되는지 알 수 없기 때문에 Transaction 을 열고 닫음에 있어 결정을 관장 해서는 안된다.
+> 때문에 Transaction 을 관장하는 계층은 Application Layer 의 UseCase 에서 이뤄져야 한다.
+> (UseCase 는 하나의 비즈니스 로직, 하나의 작업 단위이기 때문이다.)
