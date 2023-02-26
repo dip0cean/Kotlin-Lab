@@ -14,6 +14,10 @@ class Money(
 
     fun isPositiveOrZero(): Boolean = this.decimalAmount >= BigInteger.ZERO
 
+    fun isGreaterThanOrEqualTo(money: Money): Boolean = this.decimalAmount >= money.decimalAmount
+
+    fun isGreaterThan(money: Money): Boolean = this.decimalAmount > money.decimalAmount
+
     operator fun plus(calculateBalance: Money): Money =
         Money((this.amount() + calculateBalance.amount()))
 
