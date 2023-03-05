@@ -2,7 +2,7 @@ package com.study.kotlin.programmers.exam
 
 fun main() {
     val result = solution(
-        6,
+        7,
         arrayOf(
             intArrayOf(5, 6, 0),
             intArrayOf(1, 3, 1),
@@ -20,8 +20,8 @@ private const val X = "X"
 private const val QUESTION_MARK = "?"
 
 private fun solution(n: Int, delivery: Array<IntArray>): String {
-    // 제품 별 재고 여부₩
-    val warehousing = MutableList(n) { _ -> QUESTION_MARK }
+    // 제품 별 재고 여부
+    val warehousing = MutableList(n + 1) { _ -> QUESTION_MARK }
 
     // 배송 가능한 주문의 제품은 모두 재고가 있다. ( = O)
     delivery.filter { it[2] == 1 }.forEach { (0..1).forEach { i -> warehousing[it[i]] = O } }
