@@ -1,6 +1,5 @@
 package com.study.chat.global.config
 
-import com.study.chat.global.domain.JwtProvider
 import com.study.chat.global.filter.JwtAuthFilter
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest
 import org.springframework.context.annotation.Bean
@@ -22,13 +21,13 @@ class SecurityConfig {
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     @Bean
-    fun securityFilterChain(http: HttpSecurity, jwtProvider: JwtProvider): SecurityFilterChain =
+    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain =
         http.csrf().disable()
             .cors().disable()
-            .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/api/members", "/api/members/login").permitAll()
+            .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/api/members", "/api/members/sign-in").permitAll()
             .anyRequest().authenticated().and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .addFilterBefore(JwtAuthFilter(jwtProvider), UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterBefore(JwtAuthFilter(), UsernamePasswordAuthenticationFilter::class.java)
             .build()
 
     @Bean
